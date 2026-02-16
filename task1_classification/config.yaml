@@ -1,0 +1,38 @@
+# Training configuration for Pneumonia Detection
+# All experiments use these same hyperparameters for fair comparison
+
+training:
+  epochs: 30
+  batch_size: 64
+  learning_rate: 0.001
+  optimizer: adam
+  weight_decay: 0.0001
+  scheduler: reduce_on_plateau
+  scheduler_patience: 3
+  scheduler_factor: 0.5
+  early_stopping_patience: 7
+  seed: 42
+
+data:
+  image_size: 28
+  num_workers: 2
+  data_root: ./data_cache
+
+output:
+  checkpoint_dir: ./checkpoints
+  reports_dir: ./reports
+  results_dir: ./results
+
+models:
+  - name: unet
+    pretrained: false
+  - name: unet
+    pretrained: true
+  - name: resnet
+    pretrained: false
+  - name: resnet
+    pretrained: true
+  - name: efficientnet
+    pretrained: false
+  - name: efficientnet
+    pretrained: true
