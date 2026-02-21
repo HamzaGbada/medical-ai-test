@@ -187,7 +187,7 @@ def validate(
 def train(
     model_name: str,
     pretrained: bool,
-    epochs: int = 30,
+    epochs: int = 2,
     batch_size: int = 64,
     learning_rate: float = 0.001,
     weight_decay: float = 1e-4,
