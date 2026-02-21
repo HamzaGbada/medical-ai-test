@@ -93,14 +93,14 @@ All training was performed on an **NVIDIA RTX 4050 Mobile (6 GB VRAM)** on Manja
 
 ### 4.1 Test Set Performance
 
-| Model | Variant | Accuracy | Precision | Recall | F1 | ROC-AUC | Epochs | Time (s) |
-|---|---|---|---|---|---|---|---|---|
-| UNet | Scratch | 0.856 | 0.815 | 0.995 | 0.896 | 0.971 | 20 | 48 |
-| UNet | Pretrained | 0.877 | 0.838 | 0.995 | 0.910 | **0.977** | 27 | 57 |
-| ResNet18 | Scratch | 0.864 | 0.821 | **1.000** | 0.902 | 0.965 | 15 | 30 |
-| ResNet18 | Pretrained | 0.886 | 0.851 | 0.992 | 0.916 | 0.971 | 26 | 50 |
-| EfficientNet-B0 | Scratch | 0.859 | 0.821 | 0.990 | 0.898 | 0.961 | 28 | 50 |
-| **EfficientNet-B0** | **Pretrained** | **0.909** | **0.876** | 0.995 | **0.932** | 0.961 | 30 | 54 |
+| Model               | Variant        | Accuracy  | Precision | Recall    | F1        | ROC-AUC   | Epochs | Time (s) |
+|---------------------|----------------|-----------|-----------|-----------|-----------|-----------|--------|----------|
+| UNet                | Scratch        | 0.856     | 0.815     | 0.995     | 0.896     | 0.971     | 20     | 48       |
+| UNet                | Pretrained     | 0.877     | 0.838     | 0.995     | 0.910     | **0.977** | 27     | 57       |
+| ResNet18            | Scratch        | 0.864     | 0.821     | **1.000** | 0.902     | 0.965     | 15     | 30       |
+| ResNet18            | Pretrained     | 0.886     | 0.851     | 0.992     | 0.916     | 0.971     | 26     | 50       |
+| EfficientNet-B0     | Scratch        | 0.859     | 0.821     | 0.990     | 0.898     | 0.961     | 28     | 50       |
+| **EfficientNet-B0** | **Pretrained** | **0.909** | **0.876** | 0.995     | **0.932** | 0.961     | 30     | 54       |
 
 > **Best overall**: EfficientNet-B0 (Pretrained) — Accuracy 90.9%, F1 0.932  
 > **Best AUC**: UNet (Pretrained) — ROC-AUC 0.977 (strongest ranking performance)  
@@ -108,26 +108,26 @@ All training was performed on an **NVIDIA RTX 4050 Mobile (6 GB VRAM)** on Manja
 
 ### 4.2 Effect of Pretraining
 
-| Architecture | Acc. Gain | AUC Gain | Prec. Gain |
-|---|---|---|---|
-| UNet | +2.1 pp | +0.6 pp | +2.3 pp |
-| ResNet18 | +2.2 pp | +0.6 pp | +2.9 pp |
-| EfficientNet-B0 | **+5.0 pp** | +0.0 pp | **+5.4 pp** |
+| Architecture    | Acc. Gain   | AUC Gain | Prec. Gain  |
+|-----------------|-------------|----------|-------------|
+| UNet            | +2.1 pp     | +0.6 pp  | +2.3 pp     |
+| ResNet18        | +2.2 pp     | +0.6 pp  | +2.9 pp     |
+| EfficientNet-B0 | **+5.0 pp** | +0.0 pp  | **+5.4 pp** |
 
 EfficientNet-B0 benefits most from pretraining (+5 pp accuracy) — its compound-scaling design extracts richer low-level features from ImageNet textures even at 28×28. AUC gains are modest (≤0.6 pp), showing all architectures learn reasonable discriminative structure from scratch.
 
 ### 4.3 Visualizations
 
-![ResNet18 Pretrained — ROC Curve](/home/bobmarley/PycharmProjects/medical-ai-test/reports/resnet_pretrained_roc_curve.png)
+![ResNet18 Pretrained — ROC Curve](reports/resnet_pretrained_roc_curve.png)
 *Figure 1: ROC curve — ResNet18 (Pretrained). AUC = 0.971.*
 
-![EfficientNet-B0 Pretrained — ROC Curve](/home/bobmarley/PycharmProjects/medical-ai-test/reports/efficientnet_pretrained_roc_curve.png)
+![EfficientNet-B0 Pretrained — ROC Curve](reports/efficientnet_pretrained_roc_curve.png)
 *Figure 2: ROC curve — EfficientNet-B0 (Pretrained). AUC = 0.961.*
 
-![ResNet18 Pretrained — Confusion Matrix](/home/bobmarley/PycharmProjects/medical-ai-test/reports/resnet_pretrained_confusion_matrix.png)
+![ResNet18 Pretrained — Confusion Matrix](reports/resnet_pretrained_confusion_matrix.png)
 *Figure 3: Confusion matrix — ResNet18 (Pretrained).*
 
-![EfficientNet-B0 Pretrained — Confusion Matrix](/home/bobmarley/PycharmProjects/medical-ai-test/reports/efficientnet_pretrained_confusion_matrix.png)
+![EfficientNet-B0 Pretrained — Confusion Matrix](reports/efficientnet_pretrained_confusion_matrix.png)
 *Figure 4: Confusion matrix — EfficientNet-B0 (Pretrained).*
 
 ### 4.4 Recall vs. Precision Trade-off
@@ -138,13 +138,13 @@ All models exhibit **high recall (≥0.990) and moderate precision (~0.82–0.88
 
 ## 5. Failure Case Analysis with Example Images
 
-![ResNet18 Pretrained — Failure Cases](/home/bobmarley/PycharmProjects/medical-ai-test/reports/resnet_pretrained_failure_cases.png)
+![ResNet18 Pretrained — Failure Cases](reports/resnet_pretrained_failure_cases.png)
 *Figure 5: Failure cases — ResNet18 (Pretrained). Each panel: misclassified test image with true/predicted label.*
 
-![EfficientNet-B0 Pretrained — Failure Cases](/home/bobmarley/PycharmProjects/medical-ai-test/reports/efficientnet_pretrained_failure_cases.png)
+![EfficientNet-B0 Pretrained — Failure Cases](reports/efficientnet_pretrained_failure_cases.png)
 *Figure 6: Failure cases — EfficientNet-B0 (Pretrained), the best-performing model.*
 
-![UNet Pretrained — Failure Cases](/home/bobmarley/PycharmProjects/medical-ai-test/reports/unet_pretrained_failure_cases.png)
+![UNet Pretrained — Failure Cases](reports/unet_pretrained_failure_cases.png)
 *Figure 7: Failure cases — UNet (Pretrained). Most errors are false positives.*
 
 ### 5.1 Confusion Matrix Analysis

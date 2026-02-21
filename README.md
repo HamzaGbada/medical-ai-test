@@ -1,12 +1,7 @@
-# 🫁 End-to-End AI System for Pneumonia Detection
+# AI System for Pneumonia Detection
 
-> **PneumoniaMNIST** (MedMNIST v2) — Binary Classification: Normal vs Pneumonia
 
-A production-quality deep learning system for automated pneumonia detection from chest X-rays, implementing and comparing multiple CNN architectures, VLM-based report generation, and semantic image retrieval.
-
----
-
-## 📋 Project Overview
+## Project Overview
 
 This project implements a complete three-task medical AI pipeline:
 
@@ -14,7 +9,7 @@ This project implements a complete three-task medical AI pipeline:
 - **Task 2**: VLM report generation — MedGemma, Qwen-VL via Ollama / Docker / HuggingFace
 - **Task 3**: Semantic image retrieval — FastAPI + PGVector + CNN embeddings
 
-## 🗂 Repository Structure
+## 🗂epository Structure
 
 ```
 .
@@ -43,6 +38,7 @@ This project implements a complete three-task medical AI pipeline:
 │   ├── sample_selection.py
 │   ├── report_generator.py
 │   ├── evaluation.py
+│   ├── llm_service.py                 # LLM Factory (Ollama, Docker)
 │   ├── run_task2.py                   # Ollama / Docker CLI
 │   └── run_task2_hf.py                # HuggingFace CLI
 │
@@ -62,7 +58,6 @@ This project implements a complete three-task medical AI pipeline:
 │   │   └── visualize_results.py
 │   └── run_task3.py
 │
-├── llm_service.py                     # LLM Factory (Ollama, Docker)
 ├── notebooks/
 │   └── colab_demo.ipynb
 │
@@ -79,23 +74,20 @@ This project implements a complete three-task medical AI pipeline:
 
 ---
 
-## 💻 Hardware
+## Hardware
 
 All experiments were run on a **personal laptop** with the following configuration:
 
-| Component | Specification |
-|-----------|---------------|
-| **OS** | Manjaro Linux x86_64 |
-| **CPU** | 13th Gen Intel Core i7-13620H (16 threads) @ 4.700 GHz |
-| **GPU** | NVIDIA GeForce RTX 4050 Max-Q / Mobile (6 GB VRAM) |
-| **iGPU** | Intel Raptor Lake-P UHD Graphics |
-| **RAM** | ~11.9 GB used / 15.7 GB total |
-
-PyTorch automatically detects and uses the RTX 4050 via CUDA. All CNN training runs completed in 30–60 seconds per experiment. HuggingFace MedGemma inference runs in bfloat16 on the RTX 4050 (~2–4 s/report).
+| Component | Specification                                          |
+|-----------|--------------------------------------------------------|
+| **OS**    | Manjaro Linux                                          |
+| **CPU**   | 13th Gen Intel Core i7-13620H (16 threads) @ 4.700 GHz |
+| **GPU**   | NVIDIA GeForce RTX 4050 Max-Q / Mobile (6 GB VRAM)     |
+| **RAM**   | 16 GB total                                            |
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ### Prerequisites
 
@@ -110,12 +102,11 @@ PyTorch automatically detects and uses the RTX 4050 via CUDA. All CNN training r
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/HamzaGbada/medical-ai-test.git
 cd medical-ai-test
 
 # Create venv and install all dependencies in one step
-uv venv .venv
-source .venv/bin/activate
+uv init
 uv pip install -r requirements.txt
 
 # GPU users — install PyTorch with CUDA 12.1 support
@@ -126,14 +117,13 @@ uv pip install torch torchvision --index-url https://download.pytorch.org/whl/cu
 
 ```bash
 # Clone and enter directory
-git clone <repository-url>
+git clone https://github.com/HamzaGbada/medical-ai-test.git
 cd medical-ai-test
 
 # Create and activate virtual environment
 python -m venv .venv
 source .venv/bin/activate        # Linux / macOS
-# .venv\Scripts\activate          # Windows
-
+    
 # Install dependencies
 pip install -r requirements.txt
 
@@ -141,11 +131,10 @@ pip install -r requirements.txt
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
 ```
 
-> **Note**: The dataset (PneumoniaMNIST) is automatically downloaded on first run via the `medmnist` package.
-
+    
 ---
 
-## 🏋️ Task 1: CNN Classification
+## Task 1: CNN Classification
 
 ### Train a Single Model
 
@@ -174,19 +163,19 @@ python -m task1_classification.evaluate --model resnet --pretrained true
 
 ### Task 1 Outputs
 
-| Directory | File | Description |
-| --------- | ---- | ----------- |
-| `reports/` | `experiment_comparison.csv` | Full 6-model comparison |
-| `reports/` | `*_confusion_matrix.png` | Confusion matrices |
-| `reports/` | `*_roc_curve.png` | ROC curves |
-| `reports/` | `*_training_curves.png` | Loss/AUC over epochs |
-| `reports/` | `*_failure_cases.png` | Misclassified examples |
-| `results/` | `*_test_metrics.json` | Per-model test metrics |
-| `checkpoints/` | `*_best.pth` | Best model weights (by AUC) |
+| Directory      | File                        | Description                 |
+|----------------|-----------------------------|-----------------------------|
+| `reports/`     | `experiment_comparison.csv` | Full 6-model comparison     |
+| `reports/`     | `*_confusion_matrix.png`    | Confusion matrices          |
+| `reports/`     | `*_roc_curve.png`           | ROC curves                  |
+| `reports/`     | `*_training_curves.png`     | Loss/AUC over epochs        |
+| `reports/`     | `*_failure_cases.png`       | Misclassified examples      |
+| `results/`     | `*_test_metrics.json`       | Per-model test metrics      |
+| `checkpoints/` | `*_best.pth`                | Best model weights (by AUC) |
 
 ---
 
-## 🩺 Task 2: Medical Report Generation with VLMs
+## Task 2: Medical Report Generation with VLMs
 
 ### Option A — Ollama (local)
 
@@ -228,7 +217,6 @@ uv pip install transformers>=4.45.0 accelerate>=0.26.0
 # Accept licence at huggingface.co/google/medgemma-4b-it, then:
 huggingface-cli login
 
-# Run (requires RTX 4050 or equivalent, ~8GB VRAM)
 python -m task2_report_generation.run_task2_hf \
     --model_id google/medgemma-4b-it \
     --num_samples 10 \
@@ -237,17 +225,15 @@ python -m task2_report_generation.run_task2_hf \
 
 ### Task 2 Outputs
 
-| Directory | File | Description |
-| --------- | ---- | ----------- |
-| `reports/` | `task2_report_generation.md` | Ollama/Docker analysis |
-| `reports/` | `task2_hf_medgemma_report.md` | HuggingFace MedGemma report |
-| `reports/generated_reports/` | `*.json` | Individual VLM reports |
-| `results/` | `evaluation_results.json` | VLM vs GT vs CNN comparison |
-| `results/` | `strategy_analysis.json` | Per-prompt strategy stats |
+| Directory                    | File                          | Description                 |
+|------------------------------|-------------------------------|-----------------------------|
+| `reports/generated_reports/` | `*.json`                      | Individual VLM reports      |
+| `results/`                   | `evaluation_results.json`     | VLM vs GT vs CNN comparison |
+| `results/`                   | `strategy_analysis.json`      | Per-prompt strategy stats   |
 
 ---
 
-## 🔍 Task 3: Semantic Image Retrieval with PGVector
+## Task 3: Semantic Image Retrieval with PGVector
 
 ### PGVector Setup (Docker)
 
@@ -297,7 +283,7 @@ uvicorn task3_retrieval.app.main:app --reload --port 8000
 
 ---
 
-## 🔬 Dataset
+## Dataset
 
 - **Source**: [MedMNIST v2](https://medmnist.com/) — PneumoniaMNIST
 - **Task**: Binary classification (Normal vs Pneumonia)
@@ -305,7 +291,7 @@ uvicorn task3_retrieval.app.main:app --reload --port 8000
 - **Image size**: 28 × 28 grayscale (auto-downloaded on first run)
 - **Class distribution**: Normal: 37% | Pneumonia: 63%
 
-## 🔄 Reproducibility
+## Reproducibility
 
 ```bash
 python -m task1_classification.train --model resnet --pretrained true --seed 42
@@ -315,7 +301,7 @@ python -m task1_classification.train --model resnet --pretrained true --seed 42
 - Deterministic cuDNN (`torch.backends.cudnn.deterministic = True`)
 - All hyperparameters logged in `config.yaml` and result JSONs
 
-## 📝 Reports
+## Reports
 
 | Task | Report | Key Content |
 | ---- | ------ | ----------- |
@@ -323,6 +309,3 @@ python -m task1_classification.train --model resnet --pretrained true --seed 42
 | Task 2 | [`task2_report_generation.md`](task2_report_generation.md) | VLM qualitative analysis, prompting strategies |
 | Task 3 | [`task3_retrieval_system.md`](task3_retrieval_system.md) | Precision@k, retrieval grid analysis |
 
----
-
-**License**: MIT | **Author**: Medical AI Research Project | **Hardware**: RTX 4050 Mobile, Manjaro Linux
