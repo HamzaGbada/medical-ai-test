@@ -1,0 +1,7 @@
+Model,Variant,Experiment,Parameters,Training Time (s),Epochs Trained,Best Val AUC,Test Accuracy,Test Precision,Test Recall,Test F1,Test ROC-AUC
+unet,Scratch,unet_scratch,7849025,48.12,20,0.9978,0.8558,0.8151,0.9949,0.8961,0.9713
+unet,Pretrained,unet_pretrained,11859777,56.6,27,0.998,0.8766,0.838,0.9949,0.9097,0.977
+resnet,Scratch,resnet_scratch,11170753,29.93,15,0.996,0.8638,0.8211,1.0,0.9017,0.9645
+resnet,Pretrained,resnet_pretrained,11170753,50.41,26,0.9978,0.8862,0.8505,0.9923,0.916,0.9705
+efficientnet,Scratch,efficientnet_scratch,4008253,50.19,28,0.9951,0.859,0.8213,0.9897,0.8977,0.9607
+efficientnet,Pretrained,efficientnet_pretrained,4008253,53.83,30,0.999,0.9087,0.8758,0.9949,0.9316,0.9607

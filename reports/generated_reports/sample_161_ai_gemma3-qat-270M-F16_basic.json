@@ -1,0 +1,12 @@
+{
+  "image_index": 161,
+  "model_name": "ai/gemma3-qat:270M-F16",
+  "provider": "docker",
+  "strategy": "basic",
+  "system_prompt": "You are a medical imaging AI assistant.",
+  "user_prompt": "Describe this chest X-ray image. Identify any abnormalities you observe and provide your assessment.",
+  "raw_response": "Okay, I'm ready. Please provide the context of the chest X-ray image. I will analyze it and provide a summary of the abnormalities and my assessment.\n",
+  "ground_truth": 0,
+  "cnn_prediction": 1,
+  "cnn_confidence": 0.9379154443740845
+}

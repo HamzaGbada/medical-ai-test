@@ -1,0 +1,32 @@
+{
+  "basic": {
+    "n_reports": 10,
+    "gt_agreement_rate": 0.0,
+    "avg_response_length": 297,
+    "prediction_distribution": {
+      "Normal": 0,
+      "Pneumonia": 0,
+      "Unclear": 10
+    }
+  },
+  "structured": {
+    "n_reports": 10,
+    "gt_agreement_rate": 0.1,
+    "avg_response_length": 1790,
+    "prediction_distribution": {
+      "Normal": 1,
+      "Pneumonia": 5,
+      "Unclear": 4
+    }
+  },
+  "diagnostic_guided": {
+    "n_reports": 10,
+    "gt_agreement_rate": 0.3,
+    "avg_response_length": 1967,
+    "prediction_distribution": {
+      "Normal": 0,
+      "Pneumonia": 10,
+      "Unclear": 0
+    }
+  }
+}

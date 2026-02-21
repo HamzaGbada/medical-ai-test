@@ -1,0 +1,92 @@
+[
+  {
+    "index": 377,
+    "ground_truth": 0,
+    "ground_truth_name": "Normal",
+    "cnn_prediction": 0,
+    "cnn_prediction_name": "Normal",
+    "cnn_confidence": 0.0449,
+    "correctly_classified": true
+  },
+  {
+    "index": 496,
+    "ground_truth": 0,
+    "ground_truth_name": "Normal",
+    "cnn_prediction": 0,
+    "cnn_prediction_name": "Normal",
+    "cnn_confidence": 0.0056,
+    "correctly_classified": true
+  },
+  {
+    "index": 285,
+    "ground_truth": 0,
+    "ground_truth_name": "Normal",
+    "cnn_prediction": 0,
+    "cnn_prediction_name": "Normal",
+    "cnn_confidence": 0.1538,
+    "correctly_classified": true
+  },
+  {
+    "index": 228,
+    "ground_truth": 1,
+    "ground_truth_name": "Pneumonia",
+    "cnn_prediction": 1,
+    "cnn_prediction_name": "Pneumonia",
+    "cnn_confidence": 0.9984,
+    "correctly_classified": true
+  },
+  {
+    "index": 561,
+    "ground_truth": 1,
+    "ground_truth_name": "Pneumonia",
+    "cnn_prediction": 1,
+    "cnn_prediction_name": "Pneumonia",
+    "cnn_confidence": 0.9884,
+    "correctly_classified": true
+  },
+  {
+    "index": 296,
+    "ground_truth": 1,
+    "ground_truth_name": "Pneumonia",
+    "cnn_prediction": 1,
+    "cnn_prediction_name": "Pneumonia",
+    "cnn_confidence": 0.9997,
+    "correctly_classified": true
+  },
+  {
+    "index": 131,
+    "ground_truth": 0,
+    "ground_truth_name": "Normal",
+    "cnn_prediction": 1,
+    "cnn_prediction_name": "Pneumonia",
+    "cnn_confidence": 0.9379,
+    "correctly_classified": false
+  },
+  {
+    "index": 144,
+    "ground_truth": 0,
+    "ground_truth_name": "Normal",
+    "cnn_prediction": 1,
+    "cnn_prediction_name": "Pneumonia",
+    "cnn_confidence": 0.5275,
+    "correctly_classified": false
+  },
+  {
+    "index": 161,
+    "ground_truth": 0,
+    "ground_truth_name": "Normal",
+    "cnn_prediction": 1,
+    "cnn_prediction_name": "Pneumonia",
+    "cnn_confidence": 0.9379,
+    "correctly_classified": false
+  },
+  {
+    "index": 356,
+    "ground_truth": 0,
+    "ground_truth_name": "Normal",
+    "cnn_prediction": 1,
+    "cnn_prediction_name": "Pneumonia",
+    "cnn_confidence": 0.9884,
+    "correctly_classified": false
+  }
+]

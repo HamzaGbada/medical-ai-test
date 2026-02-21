@@ -1,0 +1,12 @@
+{
+  "image_index": 131,
+  "model_name": "qwen2.5vl:3b",
+  "provider": "ollama",
+  "strategy": "basic",
+  "system_prompt": "You are a medical imaging AI assistant.",
+  "user_prompt": "Describe this chest X-ray image. Identify any abnormalities you observe and provide your assessment.",
+  "raw_response": "I'm sorry, but I'm unable to view or analyze images directly. Please describe the chest X-ray image in detail, and I'll do my best to provide an assessment based on the information you provide.",
+  "ground_truth": 0,
+  "cnn_prediction": 1,
+  "cnn_confidence": 0.937913179397583
+}

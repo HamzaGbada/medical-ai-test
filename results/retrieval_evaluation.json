@@ -1,0 +1,23 @@
+{
+  "n_queries": 624,
+  "overall": {
+    "precision@1": 0.8109,
+    "precision@3": 0.7826,
+    "precision@5": 0.7452,
+    "precision@10": 0.6478
+  },
+  "per_class": {
+    "Normal": {
+      "precision@1": 0.735,
+      "precision@3": 0.7094,
+      "precision@5": 0.6735,
+      "precision@10": 0.5598
+    },
+    "Pneumonia": {
+      "precision@1": 0.8564,
+      "precision@3": 0.8265,
+      "precision@5": 0.7882,
+      "precision@10": 0.7005
+    }
+  }
+}

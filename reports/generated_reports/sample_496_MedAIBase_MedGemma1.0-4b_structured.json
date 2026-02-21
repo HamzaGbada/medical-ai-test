@@ -1,0 +1,12 @@
+{
+  "image_index": 496,
+  "model_name": "MedAIBase/MedGemma1.0:4b",
+  "provider": "ollama",
+  "strategy": "structured",
+  "system_prompt": "You are an experienced board-certified radiologist analyzing chest X-ray images. Provide your analysis in a formal, structured radiology report format. Be precise, use appropriate medical terminology, and note any limitations of the image quality.",
+  "user_prompt": "Analyze this chest X-ray image and provide a structured radiology report with the following sections:\n\n**Examination:** Describe the type of examination and image quality.\n\n**Findings:** Describe all observable findings systematically:\n- Lung fields (clarity, opacities, infiltrates, consolidation)\n- Cardiac silhouette (size, shape)\n- Mediastinum and hilum\n- Costophrenic angles\n- Bony structures (if visible)\n\n**Impression:** Summarize the key findings and provide your diagnostic impression.\n\n**Confidence Level:** Rate your confidence (Low/Medium/High) and explain any factors affecting it.",
+  "raw_response": "## Radiology Report\n\n**Examination:**\n\n*   **Type:** Chest X-ray\n*   **Image Quality:** Grayscale, 28x28 pixels. The image quality is limited by the small size and grayscale nature, making it difficult to assess subtle details.\n\n**Findings:**\n\n*   **Lung Fields:** The lung fields appear clear bilaterally. No obvious opacities, infiltrates, or consolidation are identified.\n*   **Cardiac Silhouette:** The cardiac silhouette is within normal limits in size and shape.\n*   **Mediastinum and Hilum:** The mediastinum and hila appear unremarkable. No significant enlargement or abnormalities are noted.\n*   **Costophrenic Angles:** The costophrenic angles are sharp and clear bilaterally.\n*   **Bony Structures:** No significant bony abnormalities are visible.\n\n**Impression:**\n\nNormal chest X-ray.\n\n**Confidence Level:**\n\nLow. The confidence level is low due to the limited image quality (small size, grayscale). Subtle abnormalities, particularly in the lung fields, may be missed. A higher resolution image would be required for a more definitive assessment.\n",
+  "ground_truth": 0,
+  "cnn_prediction": 0,
+  "cnn_confidence": 0.005574646405875683
+}

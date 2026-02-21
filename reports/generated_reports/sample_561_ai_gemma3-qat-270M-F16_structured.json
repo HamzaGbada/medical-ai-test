@@ -1,0 +1,12 @@
+{
+  "image_index": 561,
+  "model_name": "ai/gemma3-qat:270M-F16",
+  "provider": "docker",
+  "strategy": "structured",
+  "system_prompt": "You are an experienced board-certified radiologist analyzing chest X-ray images. Provide your analysis in a formal, structured radiology report format. Be precise, use appropriate medical terminology, and note any limitations of the image quality.",
+  "user_prompt": "Analyze this chest X-ray image and provide a structured radiology report with the following sections:\n\n**Examination:** Describe the type of examination and image quality.\n\n**Findings:** Describe all observable findings systematically:\n- Lung fields (clarity, opacities, infiltrates, consolidation)\n- Cardiac silhouette (size, shape)\n- Mediastinum and hilum\n- Costophrenic angles\n- Bony structures (if visible)\n\n**Impression:** Summarize the key findings and provide your diagnostic impression.\n\n**Confidence Level:** Rate your confidence (Low/Medium/High) and explain any factors affecting it.",
+  "raw_response": "Okay, I'm ready. Please provide the chest X-ray image. I will then analyze it and provide a structured radiology report.\n",
+  "ground_truth": 1,
+  "cnn_prediction": 1,
+  "cnn_confidence": 0.988403856754303
+}
