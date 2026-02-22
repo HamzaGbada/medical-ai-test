@@ -8,9 +8,11 @@ seaborn>=0.12.0
 scikit-learn>=1.2.0
 tqdm>=4.65.0
 pyyaml>=6.0
+Pillow
+# Task 2 — VLM report generation
 httpx
 ollama
-Pillow
+# Task 3 — Retrieval API stack
 fastapi
 uvicorn[standard]
 sqlalchemy>=2.0
@@ -18,7 +20,7 @@ pgvector
 psycopg2-binary
 python-dotenv
 python-multipart
+# HuggingFace (Task 2 MedGemma + Task 3 BioViL-T)
 transformers>=4.45.0
 accelerate>=0.26.0
-ollama
-httpx
+sentencepiece>=0.1.99

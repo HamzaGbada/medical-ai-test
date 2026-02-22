@@ -150,16 +150,16 @@ def generate_report(
     # Section 6: Limitations
     lines.append("## 6. Limitations\n")
     lines.append(
-        "- **Image resolution**: 28×28 pixels limits the visual detail available for embedding. "
+        "- **Image resolution**: 28×28 pixels limits visual detail available for embedding. "
         "Higher resolution images would produce richer, more discriminative embeddings.\n"
         "- **Binary labels**: Only Normal/Pneumonia distinction. Real clinical systems need "
         "multi-class support (viral vs. bacterial, severity grading).\n"
-        "- **Embedding generalization**: CNN embeddings are task-specific. They may not generalize "
-        "well to other chest pathologies not seen during training.\n"
-        "- **Index scalability**: IVFFLAT is sufficient for small datasets but HNSW would be "
-        "preferred for production-scale medical image archives (millions of images).\n"
-        "- **Text search**: Not supported by CNN encoder. A shared text-image embedding space "
-        "(e.g., CLIP, BiomedCLIP) would be needed for text-to-image retrieval.\n"
+        "- **Embedding generalization**: Embeddings are task-specific and may not generalise "
+        "to other chest pathologies not seen during training.\n"
+        "- **Index scalability**: IVFFLAT is sufficient for small datasets; HNSW is preferred "
+        "for production-scale archives (millions of images).\n"
+        "- **Text search (resnet18 only)**: Not supported by the CNN encoder. "
+        "Switch to BioViL-T (`EMBEDDING_MODEL=biovil`) for full text-to-image search.\n"
     )
 
     lines.append("---\n")
@@ -175,6 +175,7 @@ def run_task3(
     skip_build: bool = False,
     max_queries: int = None,
     n_visualize: int = 5,
+    model: str = "resnet18",
 ) -> None:
     """Run the complete Task 3 pipeline.
 
@@ -182,7 +183,15 @@ def run_task3(
         skip_build: Skip index building (use existing index).
         max_queries: Limit evaluation queries (for speed).
         n_visualize: Number of query visualizations.
+        model: Embedding model — 'resnet18' or 'biovil'.
     """
+    import os
+    # Override model settings BEFORE any service is instantiated
+    os.environ["EMBEDDING_MODEL"] = model
+    # Reload settings to pick up env var change
+    from task3_retrieval.app import config as cfg
+    cfg.settings.embedding_model = model
+
     from task3_retrieval.scripts.build_index import build
     from task3_retrieval.scripts.evaluate import run_evaluation
     from task3_retrieval.scripts.visualize_results import visualize_retrieval
@@ -221,9 +230,10 @@ def run_task3(
     )
 
     logger.info("=" * 70)
-    logger.info("Task 3 complete!")
-    logger.info("  API: uvicorn task3_retrieval.app.main:app --reload")
-    logger.info("  Report: reports/task3_retrieval_system.md")
+    logger.info("Task 3 complete! [model=%s]", model)
+    logger.info("  API (resnet18): uvicorn task3_retrieval.app.main:app --reload")
+    logger.info("  API (biovil):   EMBEDDING_MODEL=biovil uvicorn task3_retrieval.app.main:app --reload")
+    logger.info("  Report:         reports/task3_retrieval_system.md")
     logger.info("  Visualizations: reports/retrieval_visualizations/")
     logger.info("=" * 70)
 
@@ -244,6 +254,17 @@ def main():
         "--n_visualize", type=int, default=5,
         help="Number of query visualizations",
     )
+    parser.add_argument(
+        "--model",
+        type=str,
+        default="resnet18",
+        choices=["resnet18", "biovil"],
+        help=(
+            "Embedding model to use. "
+            "'resnet18': Task 1 fine-tuned CNN, 512-d, image search only (default). "
+            "'biovil': microsoft/BiomedVLP-BioViL-T, 128-d, image + text search."
+        ),
+    )
     args = parser.parse_args()
 
     logging.basicConfig(
@@ -256,6 +277,7 @@ def main():
         skip_build=args.skip_build,
         max_queries=args.max_queries,
         n_visualize=args.n_visualize,
+        model=args.model,
     )
 
 

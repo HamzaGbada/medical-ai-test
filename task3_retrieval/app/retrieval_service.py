@@ -2,6 +2,8 @@
 Retrieval service combining embedding extraction and database search.
 
 Provides high-level retrieval operations used by the FastAPI endpoints.
+Supports both ResNet18 (image-only) and BioViL-T (image + text) encoders,
+selected automatically via the EMBEDDING_MODEL environment variable.
 """
 
 import logging
@@ -14,7 +16,7 @@ from sqlalchemy.orm import Session
 
 from task3_retrieval.app import crud
 from task3_retrieval.app.config import settings
-from task3_retrieval.app.embedding_service import EmbeddingService
+from task3_retrieval.app.encoder_factory import get_embedding_service
 from task3_retrieval.app.schemas import SearchResult
 
 logger = logging.getLogger(__name__)
@@ -26,17 +28,19 @@ class RetrievalService:
     """High-level retrieval service for image similarity search.
 
     Combines embedding extraction with PGVector-backed similarity search.
+    Supports ResNet18 (512-d, image-only) and BioViL-T (128-d, image+text).
     """
 
-    def __init__(self, embedding_service: Optional[EmbeddingService] = None) -> None:
+    def __init__(self, embedding_service=None) -> None:
         """Initialize the retrieval service.
 
         Args:
-            embedding_service: Pre-initialized EmbeddingService. If None,
-                               a new one is created.
+            embedding_service: Pre-initialized embedding service. If None,
+                               the service is selected via encoder_factory
+                               based on settings.embedding_model.
         """
-        self.embedding_service = embedding_service or EmbeddingService()
-        logger.info("RetrievalService initialized")
+        self.embedding_service = embedding_service or get_embedding_service()
+        logger.info("RetrievalService initialized with %s", settings.embedding_model)
 
     def search_by_image_path(
         self,

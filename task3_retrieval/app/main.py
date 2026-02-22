@@ -35,8 +35,14 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="Medical Image Retrieval System",
-    description="Semantic image retrieval for PneumoniaMNIST using PGVector",
-    version="1.0.0",
+    description=(
+        "Semantic image retrieval for PneumoniaMNIST using PGVector.\n\n"
+        "Supports two embedding models:\n"
+        "- **resnet18** (default): ResNet18 Task 1 fine-tuned checkpoint, 512-d, image search only\n"
+        "- **biovil**: microsoft/BiomedVLP-BioViL-T (CVPR 2023), 128-d, image + text search\n\n"
+        "Select model via `EMBEDDING_MODEL` environment variable."
+    ),
+    version="2.0.0",
 )
 
 # Lazy-initialized retrieval service
@@ -124,7 +130,12 @@ def search_by_text(
     request: TextSearchRequest,
     db: Session = Depends(get_db),
 ):
-    """Search for images using a text query."""
+    """Search for images using a text query (requires EMBEDDING_MODEL=biovil).
+
+    With BioViL-T, text queries are projected into the same joint embedding
+    space as images, enabling direct cosine similarity search.
+    Example queries: 'bilateral lower lobe consolidation', 'normal chest'.
+    """
     try:
         svc = get_retrieval_service()
         results = svc.search_by_text(
@@ -136,10 +147,14 @@ def search_by_text(
             query_text=request.query_text,
             results=results,
         )
-    except NotImplementedError as e:
+    except NotImplementedError:
         raise HTTPException(
             status_code=501,
-            detail=str(e),
+            detail=(
+                "Text search requires EMBEDDING_MODEL=biovil. "
+                "Current model 'resnet18' only supports image-to-image search. "
+                "Restart the server with: EMBEDDING_MODEL=biovil uvicorn task3_retrieval.app.main:app --reload"
+            ),
         )
     except Exception as e:
         logger.error("Text search failed: %s", e)
@@ -148,7 +163,7 @@ def search_by_text(
 
 @app.get("/health", response_model=HealthResponse)
 def health_check(db: Session = Depends(get_db)):
-    """Health check endpoint."""
+    """Health check endpoint — reports DB status, active model, and index size."""
     try:
         total = crud.get_image_count(db)
         db_status = "connected"

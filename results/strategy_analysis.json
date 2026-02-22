@@ -1,28 +1,28 @@
 {
   "basic": {
     "n_reports": 10,
-    "gt_agreement_rate": 0.0,
-    "avg_response_length": 297,
+    "gt_agreement_rate": 0.4,
+    "avg_response_length": 1384,
     "prediction_distribution": {
-      "Normal": 0,
-      "Pneumonia": 0,
-      "Unclear": 10
+      "Normal": 4,
+      "Pneumonia": 2,
+      "Unclear": 4
     }
   },
   "structured": {
     "n_reports": 10,
-    "gt_agreement_rate": 0.1,
-    "avg_response_length": 1790,
+    "gt_agreement_rate": 0.5,
+    "avg_response_length": 1368,
     "prediction_distribution": {
-      "Normal": 1,
-      "Pneumonia": 5,
-      "Unclear": 4
+      "Normal": 2,
+      "Pneumonia": 7,
+      "Unclear": 1
     }
   },
   "diagnostic_guided": {
     "n_reports": 10,
     "gt_agreement_rate": 0.3,
-    "avg_response_length": 1967,
+    "avg_response_length": 1587,
     "prediction_distribution": {
       "Normal": 0,
       "Pneumonia": 10,

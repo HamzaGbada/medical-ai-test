@@ -1,8 +1,8 @@
 {
   "total_samples": 10,
   "cnn_accuracy_on_selected": 0.6,
-  "vlm_gt_agreement_rate": 0.1,
-  "vlm_cnn_agreement_rate": 0.3,
+  "vlm_gt_agreement_rate": 0.5,
+  "vlm_cnn_agreement_rate": 0.4,
   "evaluation_rows": [
     {
       "image_index": 131,
@@ -10,11 +10,11 @@
       "cnn_prediction": "Pneumonia",
       "cnn_correct": false,
       "cnn_confidence": 0.9379,
-      "vlm_model": "qwen2.5vl:3b",
-      "vlm_prediction": "Pneumonia",
+      "vlm_model": "google/medgemma-4b-it",
+      "vlm_prediction": "Unclear",
       "vlm_agrees_gt": false,
-      "vlm_agrees_cnn": true,
-      "impression_summary": "- **Lung Fields:** Clear with no infiltrates or consolidations.\n- **Cardiac Silhouette:** Normal size and shape.\n- **Mediastinum and Hilum:** Normal position and no evidence of widening or displacemen"
+      "vlm_agrees_cnn": false,
+      "impression_summary": "The chest X-ray is difficult to interpret due to poor image quality. There are no obvious acute findings."
     },
     {
       "image_index": 144,
@@ -22,11 +22,11 @@
       "cnn_prediction": "Pneumonia",
       "cnn_correct": false,
       "cnn_confidence": 0.5275,
-      "vlm_model": "qwen2.5vl:3b",
-      "vlm_prediction": "Unclear",
-      "vlm_agrees_gt": false,
+      "vlm_model": "google/medgemma-4b-it",
+      "vlm_prediction": "Normal",
+      "vlm_agrees_gt": true,
       "vlm_agrees_cnn": false,
-      "impression_summary": "- **Normal Chest X-ray:** The chest X-ray appears to be normal. There are no significant abnormalities in the lung fields, cardiac silhouette, mediastinum, costophrenic angles, or bony structures. The"
+      "impression_summary": "The chest X-ray shows no acute pulmonary pathology."
     },
     {
       "image_index": 161,
@@ -34,11 +34,11 @@
       "cnn_prediction": "Pneumonia",
       "cnn_correct": false,
       "cnn_confidence": 0.9379,
-      "vlm_model": "qwen2.5vl:3b",
+      "vlm_model": "google/medgemma-4b-it",
       "vlm_prediction": "Pneumonia",
       "vlm_agrees_gt": false,
       "vlm_agrees_cnn": true,
-      "impression_summary": "- The chest X-ray appears to show no obvious signs of acute pathology such as pneumonia, pulmonary edema, or pleural effusion. The lung fields are clear, and the cardiac silhouette is within normal li"
+      "impression_summary": "The chest X-ray is of poor quality and limited in its ability to provide a definitive diagnosis. The lung fields appear relatively clear, but the cardiac silhouette, mediastinum, and costophrenic angl"
     },
     {
       "image_index": 228,
@@ -46,11 +46,11 @@
       "cnn_prediction": "Pneumonia",
       "cnn_correct": true,
       "cnn_confidence": 0.9984,
-      "vlm_model": "qwen2.5vl:3b",
-      "vlm_prediction": "Normal",
-      "vlm_agrees_gt": false,
-      "vlm_agrees_cnn": false,
-      "impression_summary": "- The chest X-ray shows clear lung fields without infiltrates or consolidations. The cardiac silhouette is normal in size and shape, and the mediastinum and hilum are unremarkable. The costophrenic an"
+      "vlm_model": "google/medgemma-4b-it",
+      "vlm_prediction": "Pneumonia",
+      "vlm_agrees_gt": true,
+      "vlm_agrees_cnn": true,
+      "impression_summary": "Based on the limited image quality, it is difficult to provide a definitive diagnosis. The lung fields appear relatively clear, but small opacities or infiltrates cannot be ruled out. The cardiac silh"
     },
     {
       "image_index": 285,
@@ -58,11 +58,11 @@
       "cnn_prediction": "Normal",
       "cnn_correct": true,
       "cnn_confidence": 0.1538,
-      "vlm_model": "qwen2.5vl:3b",
+      "vlm_model": "google/medgemma-4b-it",
       "vlm_prediction": "Pneumonia",
       "vlm_agrees_gt": false,
       "vlm_agrees_cnn": false,
-      "impression_summary": "- **Lung Fields:** Clear with no apparent abnormalities.\n- **Cardiac Silhouette:** Not clearly visible.\n- **Mediastinum and Hilum:** Not clearly visible.\n- **Costophrenic Angles:** Not visible.\n- **Bo"
+      "impression_summary": "The chest X-ray is of limited quality, making it difficult to provide a definitive diagnosis. The lung fields appear clear, but subtle abnormalities may be missed. The cardiac silhouette and mediastin"
     },
     {
       "image_index": 296,
@@ -70,11 +70,11 @@
       "cnn_prediction": "Pneumonia",
       "cnn_correct": true,
       "cnn_confidence": 0.9997,
-      "vlm_model": "qwen2.5vl:3b",
-      "vlm_prediction": "Unclear",
-      "vlm_agrees_gt": false,
-      "vlm_agrees_cnn": false,
-      "impression_summary": "- The chest X-ray shows clear lung fields without infiltrates or consolidations. The cardiac silhouette is normal in size and shape, and the mediastinum and hilum are unremarkable. The costophrenic an"
+      "vlm_model": "google/medgemma-4b-it",
+      "vlm_prediction": "Pneumonia",
+      "vlm_agrees_gt": true,
+      "vlm_agrees_cnn": true,
+      "impression_summary": "The chest X-ray is of poor quality and cannot be adequately interpreted. The lung fields, cardiac silhouette, mediastinum, and costophrenic angles are obscured by artifact."
     },
     {
       "image_index": 356,
@@ -82,11 +82,11 @@
       "cnn_prediction": "Pneumonia",
       "cnn_correct": false,
       "cnn_confidence": 0.9884,
-      "vlm_model": "qwen2.5vl:3b",
-      "vlm_prediction": "Unclear",
-      "vlm_agrees_gt": false,
+      "vlm_model": "google/medgemma-4b-it",
+      "vlm_prediction": "Normal",
+      "vlm_agrees_gt": true,
       "vlm_agrees_cnn": false,
-      "impression_summary": "- **Normal Chest X-ray:** The chest X-ray is generally clear with no significant abnormalities noted. The lung fields, cardiac silhouette, mediastinum, costophrenic angles, and bony structures appear "
+      "impression_summary": "The chest X-ray is of poor quality, limiting the ability to provide a definitive diagnosis. The lung fields appear clear, and the cardiac silhouette is normal. The mediastinum and hila are not well vi"
     },
     {
       "image_index": 377,
@@ -94,11 +94,11 @@
       "cnn_prediction": "Normal",
       "cnn_correct": true,
       "cnn_confidence": 0.0449,
-      "vlm_model": "qwen2.5vl:3b",
-      "vlm_prediction": "Unclear",
+      "vlm_model": "google/medgemma-4b-it",
+      "vlm_prediction": "Pneumonia",
       "vlm_agrees_gt": false,
       "vlm_agrees_cnn": false,
-      "impression_summary": "- **Lung Fields:** Clear lung fields with no signs of infiltrates, opacities, or consolidation.\n- **Cardiac Silhouette:** Normal cardiac silhouette with no evidence of cardiomegaly.\n- **Mediastinum an"
+      "impression_summary": "The chest X-ray is of poor quality, limiting the ability to provide a definitive diagnosis. The lung fields appear clear, but the cardiac silhouette and mediastinum are not well visualized."
     },
     {
       "image_index": 496,
@@ -106,11 +106,11 @@
       "cnn_prediction": "Normal",
       "cnn_correct": true,
       "cnn_confidence": 0.0056,
-      "vlm_model": "qwen2.5vl:3b",
+      "vlm_model": "google/medgemma-4b-it",
       "vlm_prediction": "Pneumonia",
       "vlm_agrees_gt": false,
       "vlm_agrees_cnn": false,
-      "impression_summary": "- The chest X-ray shows no obvious signs of pneumonia, pulmonary edema, or other acute conditions. The lung fields are clear, and there is no evidence of significant cardiomegaly or pleural effusion. "
+      "impression_summary": "The chest X-ray is limited in quality and cannot provide a definitive diagnosis. The lung fields appear clear, but subtle abnormalities may be missed. Further imaging may be needed for a more complete"
     },
     {
       "image_index": 561,
@@ -118,11 +118,11 @@
       "cnn_prediction": "Pneumonia",
       "cnn_correct": true,
       "cnn_confidence": 0.9884,
-      "vlm_model": "qwen2.5vl:3b",
+      "vlm_model": "google/medgemma-4b-it",
       "vlm_prediction": "Pneumonia",
       "vlm_agrees_gt": true,
       "vlm_agrees_cnn": true,
-      "impression_summary": "- **Normal Chest X-ray with Mild Artifacts:** The chest X-ray is generally normal, but there are some subtle areas of increased opacity in the left upper lobe that may represent small nodules or areas"
+      "impression_summary": "The chest X-ray is of poor quality and cannot be adequately interpreted. The lung fields, cardiac silhouette, mediastinum, and costophrenic angles are not well visualized."
     }
   ]
 }

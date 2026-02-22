@@ -235,6 +235,13 @@ python -m task2_report_generation.run_task2_hf \
 
 ## Task 3: Semantic Image Retrieval with PGVector
 
+Two embedding models are supported, selectable via the `EMBEDDING_MODEL` environment variable:
+
+| Model | `EMBEDDING_MODEL` | Dim | Image Search | Text Search | Pretraining |
+|---|---|---|---|---|---|
+| ResNet18 (default) | `resnet18` | 512-d | ✅ | ❌ | ImageNet + PneumoniaMNIST fine-tune |
+| **BioViL-T** (CVPR 2023) | `biovil` | 128-d | ✅ | ✅ | MIMIC-CXR (227k CXRs) + PubMed |
+
 ### PGVector Setup (Docker)
 
 ```bash
@@ -250,17 +257,29 @@ docker run -p 5432:5432 \
 ### Run Full Pipeline
 
 ```bash
-# Build index → evaluate → visualize → report
-python -m task3_retrieval.run_task3
+# --- ResNet18 (default) ---
+python -m task3_retrieval.run_task3                      # build index + eval + visualize
+python -m task3_retrieval.run_task3 --skip_build         # skip index rebuild
 
-# Or use --skip_build if index already built
-python -m task3_retrieval.run_task3 --skip_build
+# --- BioViL-T (microsoft/BiomedVLP-BioViL-T, CVPR 2023) ---
+# First run: downloads ~1.5 GB model weights from HuggingFace
+python -m task3_retrieval.run_task3 --model biovil
+python -m task3_retrieval.run_task3 --model biovil --skip_build
 ```
+
+> **Note for BioViL-T**: The model is loaded with `trust_remote_code=True` from
+> `microsoft/BiomedVLP-BioViL-T`. Requires `transformers>=4.45.0` and
+> `sentencepiece>=0.1.99` (both in `requirements.txt`).
 
 ### Start FastAPI Server
 
 ```bash
+# ResNet18 (image search only)
 uvicorn task3_retrieval.app.main:app --reload --port 8000
+
+# BioViL-T (image + text search)
+EMBEDDING_MODEL=biovil uvicorn task3_retrieval.app.main:app --reload --port 8000
+
 # API docs: http://localhost:8000/docs
 ```
 
@@ -269,9 +288,32 @@ uvicorn task3_retrieval.app.main:app --reload --port 8000
 | Endpoint | Method | Description |
 | -------- | ------ | ----------- |
 | `/build-index` | POST | Extract embeddings, insert into PGVector, create IVFFLAT index |
-| `/search/image` | POST | Image-to-image cosine similarity search |
-| `/search/text` | POST | Text query (returns 501 — CNN encoder only) |
-| `/health` | GET | Health check with DB status and index count |
+| `/search/image` | POST | Image-to-image cosine similarity search (both models) |
+| `/search/text` | POST | Text-to-image search (**BioViL-T only**; returns 501 with resnet18) |
+| `/health` | GET | Health check with active model name, dim, and index count |
+
+### Example API Calls
+
+```bash
+# Build index
+curl -X POST http://localhost:8000/build-index \
+  -H "Content-Type: application/json" \
+  -d '{"split": "test", "batch_size": 64}'
+
+# Image-to-image search
+curl -X POST http://localhost:8000/search/image \
+  -H "Content-Type: application/json" \
+  -d '{"image_path": "data_cache/pneumoniamnist_test_0.png", "top_k": 5}'
+
+# Text-to-image search (BioViL-T only — must start server with EMBEDDING_MODEL=biovil)
+curl -X POST http://localhost:8000/search/text \
+  -H "Content-Type: application/json" \
+  -d '{"query_text": "bilateral lower lobe consolidation", "top_k": 5}'
+
+# Health check
+curl http://localhost:8000/health
+# → {"status":"ok","embedding_model":"biovil","embedding_dim":128,"total_indexed":624,...}
+```
 
 ### Task 3 Outputs
 
@@ -282,6 +324,7 @@ uvicorn task3_retrieval.app.main:app --reload --port 8000
 | `results/` | `retrieval_evaluation.json` | Precision@k metrics (624 queries) |
 
 ---
+
 
 ## Dataset
 
