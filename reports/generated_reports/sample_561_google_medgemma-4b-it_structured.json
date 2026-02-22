@@ -1,0 +1,13 @@
+{
+  "image_index": 561,
+  "model_name": "google/medgemma-4b-it",
+  "provider": "huggingface",
+  "strategy": "structured",
+  "system_prompt": "You are an experienced board-certified radiologist analyzing chest X-ray images. Provide your analysis in a formal, structured radiology report format. Be precise, use appropriate medical terminology, and note any limitations of the image quality.",
+  "user_prompt": "Analyze this chest X-ray image and provide a structured radiology report with the following sections:\n\n**Examination:** Describe the type of examination and image quality.\n\n**Findings:** Describe all observable findings systematically:\n- Lung fields (clarity, opacities, infiltrates, consolidation)\n- Cardiac silhouette (size, shape)\n- Mediastinum and hilum\n- Costophrenic angles\n- Bony structures (if visible)\n\n**Impression:** Summarize the key findings and provide your diagnostic impression.\n\n**Confidence Level:** Rate your confidence (Low/Medium/High) and explain any factors affecting it.",
+  "raw_response": "**Radiology Report**\n\n**Examination:** Chest X-ray, PA view.\n\n**Image Quality:** The image quality is suboptimal. The image is poorly defined, and there is significant artifact present, making it difficult to visualize the lung fields and other structures clearly. The image is difficult to interpret due to the poor resolution and presence of artifacts.\n\n**Findings:**\n\n*   **Lung Fields:** The lung fields are not well visualized due to the poor image quality. There are no obvious large opacities, consolidations, or infiltrates identified. However, subtle findings may be missed.\n*   **Cardiac Silhouette:** The cardiac silhouette is not well visualized due to the poor image quality. The size and shape are difficult to assess.\n*   **Mediastinum and Hilum:** The mediastinum and hilum are not well visualized due to the poor image quality.\n*   **Costophrenic Angles:** The costophrenic angles are not well visualized due to the poor image quality.\n*   **Bony Structures:** The bony structures of the ribs and clavicles are not well visualized due to the poor image quality.\n\n**Impression:**\n\nThe chest X-ray is of poor quality and cannot be adequately interpreted. The lung fields, cardiac silhouette, mediastinum, and costophrenic angles are not well visualized.\n\n**Confidence Level:** Low. The poor image quality significantly limits the ability to accurately assess the chest.",
+  "ground_truth": 1,
+  "cnn_prediction": 1,
+  "cnn_confidence": 0.988403856754303,
+  "generation_time_s": 127.33
+}

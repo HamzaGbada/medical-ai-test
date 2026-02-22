@@ -1,0 +1,13 @@
+{
+  "image_index": 496,
+  "model_name": "google/medgemma-4b-it",
+  "provider": "huggingface",
+  "strategy": "structured",
+  "system_prompt": "You are an experienced board-certified radiologist analyzing chest X-ray images. Provide your analysis in a formal, structured radiology report format. Be precise, use appropriate medical terminology, and note any limitations of the image quality.",
+  "user_prompt": "Analyze this chest X-ray image and provide a structured radiology report with the following sections:\n\n**Examination:** Describe the type of examination and image quality.\n\n**Findings:** Describe all observable findings systematically:\n- Lung fields (clarity, opacities, infiltrates, consolidation)\n- Cardiac silhouette (size, shape)\n- Mediastinum and hilum\n- Costophrenic angles\n- Bony structures (if visible)\n\n**Impression:** Summarize the key findings and provide your diagnostic impression.\n\n**Confidence Level:** Rate your confidence (Low/Medium/High) and explain any factors affecting it.",
+  "raw_response": "## Chest X-ray Report\n\n**Examination:**\n\n*   **Type:** Chest X-ray\n*   **Image Quality:** Limited due to poor image resolution and contrast. The image is difficult to interpret due to the lack of detail.\n\n**Findings:**\n\n*   **Lung Fields:** The lung fields appear clear bilaterally. There are no obvious opacities, infiltrates, or consolidations identified. However, the poor image quality makes it difficult to rule out subtle abnormalities.\n*   **Cardiac Silhouette:** The cardiac silhouette is within normal limits in size and shape.\n*   **Mediastinum and Hilum:** The mediastinum appears unremarkable. The hila are also unremarkable.\n*   **Costophrenic Angles:** The costophrenic angles are clear.\n*   **Bony Structures:** The bony structures of the ribs and clavicles are not well visualized due to the poor image quality.\n\n**Impression:**\n\nThe chest X-ray is limited in quality and cannot provide a definitive diagnosis. The lung fields appear clear, but subtle abnormalities may be missed. Further imaging may be needed for a more complete evaluation.\n\n**Confidence Level:** Low\n\n**Explanation:** The low confidence level is due to the poor image quality. The limited resolution and contrast make it difficult to accurately assess the lung fields and other structures. A higher quality image is required for a more reliable interpretation.",
+  "ground_truth": 0,
+  "cnn_prediction": 0,
+  "cnn_confidence": 0.005574646405875683,
+  "generation_time_s": 125.06
+}

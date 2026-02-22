@@ -1,0 +1,13 @@
+{
+  "image_index": 285,
+  "model_name": "google/medgemma-4b-it",
+  "provider": "huggingface",
+  "strategy": "structured",
+  "system_prompt": "You are an experienced board-certified radiologist analyzing chest X-ray images. Provide your analysis in a formal, structured radiology report format. Be precise, use appropriate medical terminology, and note any limitations of the image quality.",
+  "user_prompt": "Analyze this chest X-ray image and provide a structured radiology report with the following sections:\n\n**Examination:** Describe the type of examination and image quality.\n\n**Findings:** Describe all observable findings systematically:\n- Lung fields (clarity, opacities, infiltrates, consolidation)\n- Cardiac silhouette (size, shape)\n- Mediastinum and hilum\n- Costophrenic angles\n- Bony structures (if visible)\n\n**Impression:** Summarize the key findings and provide your diagnostic impression.\n\n**Confidence Level:** Rate your confidence (Low/Medium/High) and explain any factors affecting it.",
+  "raw_response": "**Radiology Report**\n\n**Examination:**\n\n*   **Type:** Chest X-ray\n*   **Image Quality:** Limited. The image is difficult to interpret due to poor resolution and contrast.\n\n**Findings:**\n\n*   **Lung Fields:** The lung fields appear relatively clear, although the limited image quality makes it difficult to definitively rule out subtle opacities. There is no obvious consolidation or pleural effusion.\n*   **Cardiac Silhouette:** The cardiac silhouette is not well visualized due to the poor image quality. It appears to be within normal limits, but this cannot be confirmed.\n*   **Mediastinum and Hilum:** The mediastinum and hila are not well visualized.\n*   **Costophrenic Angles:** The costophrenic angles are not well visualized.\n*   **Bony Structures:** The bony structures of the ribs and clavicles are not well visualized.\n\n**Impression:**\n\nThe chest X-ray is of limited quality, making it difficult to provide a definitive diagnosis. The lung fields appear clear, but subtle abnormalities may be missed. The cardiac silhouette and mediastinum are not well visualized.\n\n**Confidence Level:**\n\n*   **Confidence Level:** Low\n*   **Explanation:** The low confidence level is due to the poor image quality. The inability to adequately visualize the cardiac silhouette, mediastinum, and costophrenic angles limits the ability to make a reliable diagnosis. A repeat chest X-ray with improved image quality is recommended for further evaluation.",
+  "ground_truth": 0,
+  "cnn_prediction": 0,
+  "cnn_confidence": 0.1538272500038147,
+  "generation_time_s": 131.7
+}

@@ -1,0 +1,13 @@
+{
+  "image_index": 377,
+  "model_name": "google/medgemma-4b-it",
+  "provider": "huggingface",
+  "strategy": "basic",
+  "system_prompt": "You are a medical imaging AI assistant.",
+  "user_prompt": "Describe this chest X-ray image. Identify any abnormalities you observe and provide your assessment.",
+  "raw_response": "Okay, I've analyzed the chest X-ray image. Here's a description and assessment:\n\n**Description:**\n\nThe image shows the chest cavity with the lungs appearing as dark, relatively uniform areas. The heart silhouette is visible in the center. The ribs and other bony structures of the chest wall are also present.\n\n**Abnormalities Observed:**\n\n*   **Lung Fields:** The lung fields appear clear, with no obvious consolidation, masses, or significant infiltrates.\n*   **Heart Size:** The heart size appears within normal limits based on the image.\n*   **Mediastinum:** The mediastinum (the space between the lungs containing the heart, great vessels, trachea, etc.) appears normal in width and alignment.\n*   **Diaphragm:** The diaphragms appear to be in normal position.\n\n**Assessment:**\n\nBased on the provided image, there are no immediately apparent abnormalities. The lungs appear clear, and the heart size is within normal limits. However, it's important to note that this is a limited assessment based on a single image. A complete evaluation would require a full clinical history, comparison to prior images (if available), and potentially additional imaging modalities.\n\n**Disclaimer:**\n\nThis analysis is for informational purposes only and should not be considered a substitute for professional medical advice. A qualified radiologist or physician should interpret the image in the context of the patient's clinical presentation.",
+  "ground_truth": 0,
+  "cnn_prediction": 0,
+  "cnn_confidence": 0.0449371375143528,
+  "generation_time_s": 129.15
+}

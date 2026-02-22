@@ -1,0 +1,13 @@
+{
+  "image_index": 296,
+  "model_name": "google/medgemma-4b-it",
+  "provider": "huggingface",
+  "strategy": "structured",
+  "system_prompt": "You are an experienced board-certified radiologist analyzing chest X-ray images. Provide your analysis in a formal, structured radiology report format. Be precise, use appropriate medical terminology, and note any limitations of the image quality.",
+  "user_prompt": "Analyze this chest X-ray image and provide a structured radiology report with the following sections:\n\n**Examination:** Describe the type of examination and image quality.\n\n**Findings:** Describe all observable findings systematically:\n- Lung fields (clarity, opacities, infiltrates, consolidation)\n- Cardiac silhouette (size, shape)\n- Mediastinum and hilum\n- Costophrenic angles\n- Bony structures (if visible)\n\n**Impression:** Summarize the key findings and provide your diagnostic impression.\n\n**Confidence Level:** Rate your confidence (Low/Medium/High) and explain any factors affecting it.",
+  "raw_response": "**Radiology Report**\n\n**Examination:**\n\n*   **Type:** Chest X-ray\n*   **Image Quality:** Limited. The image is difficult to interpret due to poor contrast and resolution. The image is not well-defined and lacks sufficient detail to assess the lung fields, mediastinum, or other structures.\n\n**Findings:**\n\n*   **Lung Fields:** The lung fields are not clearly visualized. There is significant artifact and obscuration, making it impossible to assess for consolidation, infiltrates, or other abnormalities.\n*   **Cardiac Silhouette:** The cardiac silhouette is not clearly defined. The size and shape cannot be accurately determined due to the poor image quality.\n*   **Mediastinum and Hilum:** The mediastinum and hilum are not clearly visualized. The structures are obscured by artifact.\n*   **Costophrenic Angles:** The costophrenic angles are not clearly visualized. The image is too poor to assess for blunting or other abnormalities.\n*   **Bony Structures:** The bony structures of the rib cage are not clearly visualized due to the poor image quality.\n\n**Impression:**\n\nThe chest X-ray is of poor quality and cannot be adequately interpreted. The lung fields, cardiac silhouette, mediastinum, and costophrenic angles are obscured by artifact.\n\n**Confidence Level:**\n\n*   **Confidence Level:** Low\n*   **Explanation:** The low confidence level is due to the poor image quality. It is impossible to accurately assess the chest X-ray findings with the provided image. A repeat examination with improved image quality is required for a definitive diagnosis.",
+  "ground_truth": 1,
+  "cnn_prediction": 1,
+  "cnn_confidence": 0.9997443556785583,
+  "generation_time_s": 141.62
+}

@@ -1,0 +1,13 @@
+{
+  "image_index": 144,
+  "model_name": "google/medgemma-4b-it",
+  "provider": "huggingface",
+  "strategy": "structured",
+  "system_prompt": "You are an experienced board-certified radiologist analyzing chest X-ray images. Provide your analysis in a formal, structured radiology report format. Be precise, use appropriate medical terminology, and note any limitations of the image quality.",
+  "user_prompt": "Analyze this chest X-ray image and provide a structured radiology report with the following sections:\n\n**Examination:** Describe the type of examination and image quality.\n\n**Findings:** Describe all observable findings systematically:\n- Lung fields (clarity, opacities, infiltrates, consolidation)\n- Cardiac silhouette (size, shape)\n- Mediastinum and hilum\n- Costophrenic angles\n- Bony structures (if visible)\n\n**Impression:** Summarize the key findings and provide your diagnostic impression.\n\n**Confidence Level:** Rate your confidence (Low/Medium/High) and explain any factors affecting it.",
+  "raw_response": "**Radiology Report**\n\n**Examination:** Chest X-ray, PA view.\n\n**Image Quality:** The image quality is adequate for a preliminary assessment. The image is somewhat limited by the low resolution and lack of sufficient penetration.\n\n**Findings:**\n\n*   **Lung Fields:** The lung fields are clear bilaterally, without evidence of consolidation, pleural effusion, or pneumothorax. There is no obvious pulmonary edema.\n*   **Cardiac Silhouette:** The cardiac silhouette is within normal limits in size and shape.\n*   **Mediastinum and Hilum:** The mediastinum is unremarkable in width. The hila are clear.\n*   **Costophrenic Angles:** The costophrenic angles are sharp and clear.\n*   **Bony Structures:** The bony structures of the ribs and clavicles are visible.\n\n**Impression:**\n\nThe chest X-ray shows no acute pulmonary pathology.\n\n**Confidence Level:** Medium. The image quality is limited, which affects the ability to fully evaluate the lung fields. A higher resolution image would be beneficial for a more definitive assessment.",
+  "ground_truth": 0,
+  "cnn_prediction": 1,
+  "cnn_confidence": 0.5275219678878784,
+  "generation_time_s": 1708.36
+}

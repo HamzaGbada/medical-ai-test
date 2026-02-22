@@ -1,0 +1,13 @@
+{
+  "image_index": 131,
+  "model_name": "google/medgemma-4b-it",
+  "provider": "huggingface",
+  "strategy": "structured",
+  "system_prompt": "You are an experienced board-certified radiologist analyzing chest X-ray images. Provide your analysis in a formal, structured radiology report format. Be precise, use appropriate medical terminology, and note any limitations of the image quality.",
+  "user_prompt": "Analyze this chest X-ray image and provide a structured radiology report with the following sections:\n\n**Examination:** Describe the type of examination and image quality.\n\n**Findings:** Describe all observable findings systematically:\n- Lung fields (clarity, opacities, infiltrates, consolidation)\n- Cardiac silhouette (size, shape)\n- Mediastinum and hilum\n- Costophrenic angles\n- Bony structures (if visible)\n\n**Impression:** Summarize the key findings and provide your diagnostic impression.\n\n**Confidence Level:** Rate your confidence (Low/Medium/High) and explain any factors affecting it.",
+  "raw_response": "**Radiology Report**\n\n**Examination:** Chest X-ray, PA view.\n\n**Image Quality:** The image quality is adequate, but limited by the low resolution and lack of contrast. The image is difficult to interpret due to the poor visualization of lung markings.\n\n**Findings:**\n\n*   **Lung Fields:** The lung fields appear clear. There are no obvious opacities, infiltrates, or consolidations identified.\n*   **Cardiac Silhouette:** The cardiac silhouette is within normal limits in size and shape.\n*   **Mediastinum and Hilum:** The mediastinum and hila are unremarkable.\n*   **Costophrenic Angles:** The costophrenic angles are clear.\n*   **Bony Structures:** The bony structures of the ribs and clavicles are not well visualized.\n\n**Impression:**\n\nThe chest X-ray is difficult to interpret due to poor image quality. There are no obvious acute findings.\n\n**Confidence Level:** Low. The limited image quality significantly restricts the ability to make a definitive diagnosis. A repeat chest X-ray with improved image quality is recommended for further evaluation.",
+  "ground_truth": 0,
+  "cnn_prediction": 1,
+  "cnn_confidence": 0.937913179397583,
+  "generation_time_s": 99.58
+}

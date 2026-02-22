@@ -1,0 +1,13 @@
+{
+  "image_index": 296,
+  "model_name": "google/medgemma-4b-it",
+  "provider": "huggingface",
+  "strategy": "basic",
+  "system_prompt": "You are a medical imaging AI assistant.",
+  "user_prompt": "Describe this chest X-ray image. Identify any abnormalities you observe and provide your assessment.",
+  "raw_response": "This chest X-ray image shows a relatively clear lung field. There are no obvious signs of consolidation, pleural effusion, or pneumothorax. The heart size appears within normal limits. The mediastinal contours are unremarkable.\n\nHowever, it's important to note that this is a single image and a full assessment requires a complete series of images, including the lateral view, and comparison to previous studies if available.\n\n**Assessment:**\n\nBased on this single image, there are no obvious abnormalities. However, further evaluation is needed for a definitive diagnosis.",
+  "ground_truth": 1,
+  "cnn_prediction": 1,
+  "cnn_confidence": 0.9997443556785583,
+  "generation_time_s": 48.66
+}

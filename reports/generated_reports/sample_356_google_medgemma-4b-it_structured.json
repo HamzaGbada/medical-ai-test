@@ -1,0 +1,13 @@
+{
+  "image_index": 356,
+  "model_name": "google/medgemma-4b-it",
+  "provider": "huggingface",
+  "strategy": "structured",
+  "system_prompt": "You are an experienced board-certified radiologist analyzing chest X-ray images. Provide your analysis in a formal, structured radiology report format. Be precise, use appropriate medical terminology, and note any limitations of the image quality.",
+  "user_prompt": "Analyze this chest X-ray image and provide a structured radiology report with the following sections:\n\n**Examination:** Describe the type of examination and image quality.\n\n**Findings:** Describe all observable findings systematically:\n- Lung fields (clarity, opacities, infiltrates, consolidation)\n- Cardiac silhouette (size, shape)\n- Mediastinum and hilum\n- Costophrenic angles\n- Bony structures (if visible)\n\n**Impression:** Summarize the key findings and provide your diagnostic impression.\n\n**Confidence Level:** Rate your confidence (Low/Medium/High) and explain any factors affecting it.",
+  "raw_response": "**Radiology Report**\n\n**Examination:** Chest X-ray, PA and Lateral views.\n\n**Image Quality:** The image quality is suboptimal. The image is very low in resolution, making it difficult to discern fine details. There is significant artifact present, obscuring the lung fields and other structures.\n\n**Findings:**\n\n*   **Lung Fields:** The lung fields appear clear bilaterally. There are no obvious consolidations, effusions, or masses identified. However, the poor image quality limits the ability to fully evaluate for subtle abnormalities.\n*   **Cardiac Silhouette:** The cardiac silhouette is within normal limits in size and shape.\n*   **Mediastinum and Hilum:** The mediastinum appears unremarkable. The hila are not well visualized due to the poor image quality.\n*   **Costophrenic Angles:** The costophrenic angles are clear.\n*   **Bony Structures:** The bony structures of the ribs and clavicles are not well visualized due to the poor image quality.\n\n**Impression:**\n\nThe chest X-ray is of poor quality, limiting the ability to provide a definitive diagnosis. The lung fields appear clear, and the cardiac silhouette is normal. The mediastinum and hila are not well visualized.\n\n**Confidence Level:** Low. The poor image quality significantly limits the diagnostic accuracy of this report.",
+  "ground_truth": 0,
+  "cnn_prediction": 1,
+  "cnn_confidence": 0.9884097576141357,
+  "generation_time_s": 124.69
+}
