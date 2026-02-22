@@ -331,7 +331,7 @@ Early-stage pneumonia with focal opacities confined to one lobe has an embedding
 
 **Exact search available**: IVFFLAT can be replaced with brute-force exact cosine search by removing the index — useful for critical precision requirements.
 
-### 7.3 Limitations and BioViL-T as the Scientific Solution
+### 7.3 Limitations
 
 **Limitation 1 — 28×28 resolution ceiling**:  
 As in Tasks 1–2, the primary bottleneck is image resolution. With full-resolution chest radiographs, expected P@1 > 0.95. The CNN encoder trained on 28×28 crops extracts coarse global features only. **BioViL-T partially mitigates this**: its ResNet-50 backbone is a deeper, more expressive feature extractor than ResNet18, and its MIMIC-CXR pretraining on full-resolution (512×512+) radiographs means its learned filters encode fine-grained CXR texture patterns that may partially transfer even at 28×28.
@@ -345,63 +345,3 @@ ResNet18's embedding space separates Normal from Pneumonia but does not capture 
 **Limitation 4 — IVFFLAT approximation**:  
 IVFFLAT is an approximate index. For clinical retrieval where missing the true nearest neighbour has consequences, HNSW (Hierarchical Navigable Small Worlds) offers better recall at comparable speed. This is a configurable parameter if exact recall is required.
 
----
-
-## 8. Conclusions and BioViL-T Upgrade Roadmap
-
-### 8.1 Current System Conclusions
-
-The ResNet18-based retrieval system achieves **P@1 = 0.811** on 624 PneumoniaMNIST queries, substantially outperforming the random baseline (62.5%). Pneumonia retrieves more reliably than Normal (P@1 = 0.856 vs. 0.735) due to the training emphasis of the CNN encoder and the class imbalance favouring Pneumonia clusters. The dominant failure mode — cross-class retrieval of Normal images with dense markings — directly mirrors the Task 1 CNN false positive pattern, confirming that **embedding quality is bounded by the underlying model's discriminative capacity**.
-
-### 8.2 BioViL-T Upgrade — System Design
-
-Replacing ResNet18 with `microsoft/BiomedVLP-BioViL-T` as the embedding backbone would require the following changes:
-
-```python
-from transformers import AutoModel, AutoTokenizer
-import torch
-
-# Load encoder
-url = "microsoft/BiomedVLP-BioViL-T"
-tokenizer = AutoTokenizer.from_pretrained(url, trust_remote_code=True)
-model = AutoModel.from_pretrained(url, trust_remote_code=True).eval()
-
-# Image embedding (replaces ResNet18 feature extraction)
-def embed_image_biovil(image_tensor):  # image_tensor: [1, 3, H, W]
-    with torch.no_grad():
-        embedding = model.get_projected_global_embedding(
-            pixel_values=image_tensor  # expects 3-channel, ~512×512
-        )
-        return torch.nn.functional.normalize(embedding, dim=-1)  # L2 norm for PGVector
-
-# Text embedding (NEW — enables /search/text endpoint)
-def embed_text_biovil(text_query: str):
-    with torch.no_grad():
-        tokens = tokenizer(
-            text_query, return_tensors="pt", padding=True, truncation=True
-        )
-        embedding = model.get_projected_text_embeddings(
-            input_ids=tokens.input_ids,
-            attention_mask=tokens.attention_mask
-        )
-        return torch.nn.functional.normalize(embedding, dim=-1)
-```
-
-**PGVector schema change**: Embedding dimension changes from 512-d (ResNet18) to **128-d** (BioViL-T projected space). The `vector(512)` column must be updated to `vector(128)` and the index rebuilt.
-
-### 8.3 Summary of Scientific Rationale for BioViL-T
-
-| Research Dimension | ResNet18 (Current) | BioViL-T (Proposed) |
-|---|---|---|
-| Pretraining domain | Natural images (ImageNet) | Chest X-rays + radiology text (MIMIC-CXR) |
-| Retrieval mode supported | Image → Image only | Image → Image **and** Text → Image |
-| Sub-class discrimination | Binary (Normal/Pneumonia) | Pathological finding-level |
-| Temporal reasoning | None | Interval change encoding (CVPR 2023) |
-| Expected P@1 gain | — | +4–8 pp especially on Normal class |
-| Clinical applicability | Research demo | Closest to real CBIR deployment |
-
-Future work should: (i) deploy BioViL-T as the image encoder, (ii) implement the `/search/text` endpoint using BioViL-T's joint embedding space, (iii) extend to high-resolution input (224×224 or 512×512) using the original MIMIC-CXR images, and (iv) expand to multi-class datasets (NIH ChestX-ray14, CheXpert) with sub-class annotations to fully exploit BioViL-T's pathological granularity.
-
----
-
-*Evaluation: `results/retrieval_evaluation.json` (n=624) | Visualization: `reports/retrieval_visualizations/retrieval_grid.png` | BioViL-T: [huggingface.co/microsoft/BiomedVLP-BioViL-T](https://huggingface.co/microsoft/BiomedVLP-BioViL-T) | Paper: [arXiv:2301.04558 (CVPR 2023)](https://arxiv.org/abs/2301.04558)*
